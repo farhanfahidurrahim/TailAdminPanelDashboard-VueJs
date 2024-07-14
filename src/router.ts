@@ -1,21 +1,23 @@
 // src/router/index.js
-import { createRouter, createWebHistory } from 'vue-router';
-import { isAuthenticated } from '@/auth';
+import { createRouter, createWebHistory } from 'vue-router'
+import { isAuthenticated } from '@/stores/auth'
 
-import Login from '@/views/Authentication/Login.vue';
-import CalendarView from '@/views/CalendarView.vue';
-import BasicChartView from '@/views/Charts/BasicChartView.vue';
-import Dashboard from '@/views/Dashboard.vue';
-import FormElementsView from '@/views/Forms/FormElementsView.vue';
-import FormLayoutView from '@/views/Forms/FormLayoutView.vue';
-import SettingsView from '@/views/Pages/SettingsView.vue';
-import ProfileView from '@/views/ProfileView.vue';
-import TablesView from '@/views/TablesView.vue';
-import AlertsView from '@/views/UiElements/AlertsView.vue';
-import ButtonsView from '@/views/UiElements/ButtonsView.vue';
+import Login from '@/views/Authentication/Login.vue'
+import CalendarView from '@/views/CalendarView.vue'
+import BasicChartView from '@/views/Charts/BasicChartView.vue'
+import Dashboard from '@/views/Dashboard.vue'
+import FormElementsView from '@/views/Forms/FormElementsView.vue'
+import FormLayoutView from '@/views/Forms/FormLayoutView.vue'
+import SettingsView from '@/views/Pages/SettingsView.vue'
+import ProfileView from '@/views/ProfileView.vue'
+import TablesView from '@/views/TablesView.vue'
+import AlertsView from '@/views/UiElements/AlertsView.vue'
+import ButtonsView from '@/views/UiElements/ButtonsView.vue'
 
-import ProductList from '@/views/Product/ProductList.vue';
-import ProductCreate from '@/views/Product/ProductCreate.vue';
+import BrandList from '@/views/Brand/BrandList.vue'
+import BrandCreate from '@/views/Brand/BrandCreate.vue'
+import ProductList from '@/views/Product/ProductList.vue'
+import ProductCreate from '@/views/Product/ProductCreate.vue'
 
 const routes = [
   {
@@ -24,7 +26,7 @@ const routes = [
     component: Login,
     meta: {
       title: 'Login',
-      guest: true // Custom meta field to indicate that this route is for guests only
+      guest: true
     }
   },
   {
@@ -32,10 +34,31 @@ const routes = [
     name: 'dashboard',
     component: Dashboard,
     meta: {
-      title: 'Category',
+      title: 'Dashboard',
       requiresAuth: true
     }
   },
+
+  // Brand
+  {
+    path: '/brand/list',
+    name: 'brandList',
+    component: BrandList,
+    meta: {
+      title: 'Brand List',
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/brand/create',
+    name: 'brandCreate',
+    component: BrandCreate,
+    meta: {
+      title: 'Brand Create',
+      requiresAuth: true
+    }
+  },
+
   // Product
   {
     path: '/product/list',
@@ -55,6 +78,8 @@ const routes = [
       requiresAuth: true
     }
   },
+
+
   {
     path: '/calendar',
     name: 'calendar',
