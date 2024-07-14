@@ -2,6 +2,7 @@
 import { useSidebarStore } from '@/stores/sidebar'
 import { useRoute } from 'vue-router'
 import SidebarDropdown from './SidebarDropdown.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const sidebarStore = useSidebarStore()
 
@@ -33,7 +34,6 @@ const handleItemClick = () => {
       }"
     >
       <span v-html="item.icon"></span>
-
       {{ item.label }}
 
       <svg

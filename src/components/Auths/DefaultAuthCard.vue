@@ -5,9 +5,9 @@ const props = defineProps(['subtitle', 'title', 'customClasses'])
 <template>
   <!-- ====== Forms Section Start -->
   <div
-    class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
+    class="rounded-sm"
   >
-    <div class="flex flex-wrap items-center">
+    <div class="flex flex-wrap items-center m-32 shadow shadow-form-strokedark">
       <div class="hidden w-full xl:block xl:w-1/2">
         <div class="py-17.5 px-26 text-center">
           <router-link class="mb-5.5 inline-block" to="/">

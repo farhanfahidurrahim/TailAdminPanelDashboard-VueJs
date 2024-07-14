@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import SigninView from '@/views/Authentication/SigninView.vue'
-import SignupView from '@/views/Authentication/SignupView.vue'
+import Login from '@/views/Authentication/Login.vue'
 import CalendarView from '@/views/CalendarView.vue'
 import BasicChartView from '@/views/Charts/BasicChartView.vue'
-import ECommerceView from '@/views/Dashboard/ECommerceView.vue'
+import Dashboard from '@/views/Dashboard.vue'
 import FormElementsView from '@/views/Forms/FormElementsView.vue'
 import FormLayoutView from '@/views/Forms/FormLayoutView.vue'
 import SettingsView from '@/views/Pages/SettingsView.vue'
@@ -13,15 +12,45 @@ import TablesView from '@/views/TablesView.vue'
 import AlertsView from '@/views/UiElements/AlertsView.vue'
 import ButtonsView from '@/views/UiElements/ButtonsView.vue'
 
+import ProductList from '@/views/Product/ProductList.vue'
+import ProductCreate from '@/views/Product/ProductCreate.vue'
+
+
 const routes = [
   {
-    path: '/',
-    name: 'eCommerce',
-    component: ECommerceView,
+    path: '/login',
+    name: 'login',
+    component: Login,
     meta: {
-      title: 'eCommerce Dashboard'
+      title: 'Login'
     }
   },
+  {
+    path: '/',
+    name: 'dashboard',
+    component: Dashboard,
+    meta: {
+      title: 'Category'
+    }
+  },
+  // Product
+  {
+    path: '/product/list',
+    name: 'productList',
+    component: ProductList,
+    meta: {
+      title: 'Product List'
+    }
+  },
+  {
+    path: '/product/create',
+    name: 'productCreate',
+    component: ProductCreate,
+    meta: {
+      title: 'Product Create'
+    }
+  },
+
   {
     path: '/calendar',
     name: 'calendar',
@@ -94,22 +123,6 @@ const routes = [
       title: 'Buttons'
     }
   },
-  {
-    path: '/auth/signin',
-    name: 'signin',
-    component: SigninView,
-    meta: {
-      title: 'Signin'
-    }
-  },
-  {
-    path: '/auth/signup',
-    name: 'signup',
-    component: SignupView,
-    meta: {
-      title: 'Signup'
-    }
-  }
 ]
 
 const router = createRouter({

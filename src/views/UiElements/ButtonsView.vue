@@ -32,9 +32,9 @@ const pageTitle = ref('Buttons')
       </div>
 
       <div class="mb-7.5 flex flex-wrap gap-5 xl:gap-20">
-        <ButtonDefault route="/" label="Button" customClasses="bg-meta-3 text-white" />
-        <ButtonDefault route="/" label="Button" customClasses="bg-meta-3 text-white rounded-md" />
-        <ButtonDefault route="/" label="Button" customClasses="bg-meta-3 text-white rounded-full" />
+        <ButtonDefault route="/" label="Button 1" customClasses="bg-meta-3 text-white" />
+        <ButtonDefault route="/" label="Button 1" customClasses="bg-meta-3 text-white rounded-md" />
+        <ButtonDefault route="/" label="Button 1" customClasses="bg-meta-3 text-white rounded-full" />
         <ButtonDefault
           route="/"
           label="Button"
@@ -43,9 +43,9 @@ const pageTitle = ref('Buttons')
       </div>
 
       <div class="flex flex-wrap gap-5 xl:gap-20">
-        <ButtonDefault route="/" label="Button" customClasses="bg-black text-white" />
-        <ButtonDefault route="/" label="Button" customClasses="bg-black text-white rounded-md" />
-        <ButtonDefault route="/" label="Button" customClasses="bg-black text-white rounded-full" />
+        <ButtonDefault route="/" label="Button 2" customClasses="bg-black text-white" />
+        <ButtonDefault route="/" label="Button 2" customClasses="bg-black text-white rounded-md" />
+        <ButtonDefault route="/" label="Button 2" customClasses="bg-black text-white rounded-full" />
         <ButtonDefault
           route="/"
           label="Button"

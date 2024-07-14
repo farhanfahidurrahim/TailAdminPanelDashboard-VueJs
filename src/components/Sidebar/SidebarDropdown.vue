@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useSidebarStore } from '@/stores/sidebar'
 import { ref } from 'vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const sidebarStore = useSidebarStore()
 
@@ -26,6 +27,7 @@ const handleItemClick = (index: number) => {
             '!text-white': childItem.label === sidebarStore.selected
           }"
         >
+          <font-awesome-icon :icon="['far', 'circle']" v-if="childItem.icon" style="width: 14px; height: 14px;" />
           {{ childItem.label }}
         </router-link>
       </li>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const props = defineProps(['label', 'type', 'placeholder'])
+import { defineProps } from 'vue';
+
+const props = defineProps(['label', 'type', 'placeholder']);
 </script>
 
 <template>
@@ -18,3 +20,4 @@ const props = defineProps(['label', 'type', 'placeholder'])
     </div>
   </div>
 </template>
+

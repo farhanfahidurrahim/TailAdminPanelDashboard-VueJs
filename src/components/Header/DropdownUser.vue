@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onClickOutside } from '@vueuse/core'
 import { ref } from 'vue'
+import router from '@/router'
+import { useToast } from 'vue-toastification'
 
 const target = ref(null)
 const dropdownOpen = ref(false)
@@ -8,6 +10,12 @@ const dropdownOpen = ref(false)
 onClickOutside(target, () => {
   dropdownOpen.value = false
 })
+const toast = useToast();
+
+const logout = () => {
+  toast.success("Logout")
+  router.push({name: "login"})
+};
 </script>
 
 <template>
@@ -122,7 +130,7 @@ onClickOutside(target, () => {
           </router-link>
         </li>
       </ul>
-      <button
+      <button @click="logout"
         class="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
       >
         <svg

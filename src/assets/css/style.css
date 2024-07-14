@@ -243,6 +243,14 @@ input[type='search']::-webkit-search-cancel-button {
     background-image: url(../images/icon/icon-arrow-down.svg);
 }
 
+#nprogress .bar {
+    background: green;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px green, 0 0 5px green;
+}
+
 [x-cloak] {
     display: none !important;
 }
