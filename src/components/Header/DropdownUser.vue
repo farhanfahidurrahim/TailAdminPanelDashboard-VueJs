@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { onClickOutside } from '@vueuse/core'
 import { ref } from 'vue'
-import router from '@/router'
 import { useToast } from 'vue-toastification'
+import axios from 'axios'
+import {useRouter} from "vue-router";
 
 const target = ref(null)
 const dropdownOpen = ref(false)
@@ -11,11 +12,17 @@ onClickOutside(target, () => {
   dropdownOpen.value = false
 })
 const toast = useToast();
+const router = useRouter();
 
 const logout = () => {
-  toast.success("Logout")
-  router.push({name: "login"})
-};
+  localStorage.removeItem("authToken");
+  localStorage.removeItem("userData");
+
+  delete axios.defaults.headers.common["Authorization"];
+
+  toast.success("Logout successful!")
+  router.push({name: "login"});
+}
 </script>
 
 <template>

@@ -1,20 +1,21 @@
-import { createRouter, createWebHistory } from 'vue-router'
+// src/router/index.js
+import { createRouter, createWebHistory } from 'vue-router';
+import { isAuthenticated } from '@/auth';
 
-import Login from '@/views/Authentication/Login.vue'
-import CalendarView from '@/views/CalendarView.vue'
-import BasicChartView from '@/views/Charts/BasicChartView.vue'
-import Dashboard from '@/views/Dashboard.vue'
-import FormElementsView from '@/views/Forms/FormElementsView.vue'
-import FormLayoutView from '@/views/Forms/FormLayoutView.vue'
-import SettingsView from '@/views/Pages/SettingsView.vue'
-import ProfileView from '@/views/ProfileView.vue'
-import TablesView from '@/views/TablesView.vue'
-import AlertsView from '@/views/UiElements/AlertsView.vue'
-import ButtonsView from '@/views/UiElements/ButtonsView.vue'
+import Login from '@/views/Authentication/Login.vue';
+import CalendarView from '@/views/CalendarView.vue';
+import BasicChartView from '@/views/Charts/BasicChartView.vue';
+import Dashboard from '@/views/Dashboard.vue';
+import FormElementsView from '@/views/Forms/FormElementsView.vue';
+import FormLayoutView from '@/views/Forms/FormLayoutView.vue';
+import SettingsView from '@/views/Pages/SettingsView.vue';
+import ProfileView from '@/views/ProfileView.vue';
+import TablesView from '@/views/TablesView.vue';
+import AlertsView from '@/views/UiElements/AlertsView.vue';
+import ButtonsView from '@/views/UiElements/ButtonsView.vue';
 
-import ProductList from '@/views/Product/ProductList.vue'
-import ProductCreate from '@/views/Product/ProductCreate.vue'
-
+import ProductList from '@/views/Product/ProductList.vue';
+import ProductCreate from '@/views/Product/ProductCreate.vue';
 
 const routes = [
   {
@@ -22,7 +23,8 @@ const routes = [
     name: 'login',
     component: Login,
     meta: {
-      title: 'Login'
+      title: 'Login',
+      guest: true // Custom meta field to indicate that this route is for guests only
     }
   },
   {
@@ -30,7 +32,8 @@ const routes = [
     name: 'dashboard',
     component: Dashboard,
     meta: {
-      title: 'Category'
+      title: 'Category',
+      requiresAuth: true
     }
   },
   // Product
@@ -39,7 +42,8 @@ const routes = [
     name: 'productList',
     component: ProductList,
     meta: {
-      title: 'Product List'
+      title: 'Product List',
+      requiresAuth: true
     }
   },
   {
@@ -47,16 +51,17 @@ const routes = [
     name: 'productCreate',
     component: ProductCreate,
     meta: {
-      title: 'Product Create'
+      title: 'Product Create',
+      requiresAuth: true
     }
   },
-
   {
     path: '/calendar',
     name: 'calendar',
     component: CalendarView,
     meta: {
-      title: 'Calendar'
+      title: 'Calendar',
+      requiresAuth: true
     }
   },
   {
@@ -64,7 +69,8 @@ const routes = [
     name: 'profile',
     component: ProfileView,
     meta: {
-      title: 'Profile'
+      title: 'Profile',
+      requiresAuth: true
     }
   },
   {
@@ -72,7 +78,8 @@ const routes = [
     name: 'formElements',
     component: FormElementsView,
     meta: {
-      title: 'Form Elements'
+      title: 'Form Elements',
+      requiresAuth: true
     }
   },
   {
@@ -80,7 +87,8 @@ const routes = [
     name: 'formLayout',
     component: FormLayoutView,
     meta: {
-      title: 'Form Layout'
+      title: 'Form Layout',
+      requiresAuth: true
     }
   },
   {
@@ -88,7 +96,8 @@ const routes = [
     name: 'tables',
     component: TablesView,
     meta: {
-      title: 'Tables'
+      title: 'Tables',
+      requiresAuth: true
     }
   },
   {
@@ -96,7 +105,8 @@ const routes = [
     name: 'settings',
     component: SettingsView,
     meta: {
-      title: 'Settings'
+      title: 'Settings',
+      requiresAuth: true
     }
   },
   {
@@ -104,7 +114,8 @@ const routes = [
     name: 'basicChart',
     component: BasicChartView,
     meta: {
-      title: 'Basic Chart'
+      title: 'Basic Chart',
+      requiresAuth: true
     }
   },
   {
@@ -112,7 +123,8 @@ const routes = [
     name: 'alerts',
     component: AlertsView,
     meta: {
-      title: 'Alerts'
+      title: 'Alerts',
+      requiresAuth: true
     }
   },
   {
@@ -120,10 +132,11 @@ const routes = [
     name: 'buttons',
     component: ButtonsView,
     meta: {
-      title: 'Buttons'
+      title: 'Buttons',
+      requiresAuth: true
     }
-  },
-]
+  }
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -131,11 +144,26 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { left: 0, top: 0 }
   }
-})
+});
 
 router.beforeEach((to, from, next) => {
-  document.title = `Vue.js ${to.meta.title} | TailAdmin - Vue.js Tailwind CSS Dashboard Template`
-  next()
-})
+  document.title = `Vue.js ${to.meta.title} | TailAdmin - Vue.js Tailwind CSS Dashboard Template`;
 
-export default router
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!isAuthenticated()) {
+      next({ name: 'login' });
+    } else {
+      next();
+    }
+  } else if (to.matched.some(record => record.meta.guest)) {
+    if (isAuthenticated()) {
+      next({ path: '/' });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;
